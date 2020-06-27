@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity{
     public void btnAcceder_Onclick(View view){
         if(rbRetrofit.isChecked()){
             Toast.makeText(this,"Retrofit seleccionado",Toast.LENGTH_LONG).show();
+
         }
         else if(rbVolley.isChecked()){
             Toast.makeText(this,"Volley seleccionado",Toast.LENGTH_LONG).show();
