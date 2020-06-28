@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
             public void onResponse(Call<List<Bancos>> call, Response<List<Bancos>> response) {
                 //Codigo de respuesta a la petición realizada
                 String cod_respuesta = "Código "+response.code();
+                //Definiendo donde se guardaran los valores obtenidos
                 String valores ="";
                 List<Bancos> lista_bancos = response.body();
                 //Almacenando en la lista de tipo Bancos cada uno alojado en el JSON
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<List<Bancos>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"Error, ",Toast.LENGTH_LONG).show();;
             }
         });
     }

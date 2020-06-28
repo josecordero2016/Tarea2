@@ -26,14 +26,17 @@ public class ActivityResultado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
+        //Obteniendo los valores del activity anterior
         Bundle b = this.getIntent().getExtras();
         final String valores[] = b.getStringArray("Valores");
         final TextView lblResultado = (TextView)findViewById(R.id.lblResultado);
+
         //Implementación de volley
         RequestQueue cola = Volley.newRequestQueue(this);
         StringRequest peticion = new StringRequest(Request.Method.GET, "http://uealecpeterson.net/ws/login.php?usr="+valores[0]+"&pass="+valores[1], new Response.Listener<String>() {
             @Override
             public void onResponse(String respuesta_ws) {
+                //Colocando la respuesta del WebService en el textview
                 lblResultado.setText(respuesta_ws);
             }
         }, new
