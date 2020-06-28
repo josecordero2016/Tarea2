@@ -2,6 +2,7 @@ package com.example.tarea2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,7 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity{
 
     private EditText txtUsuario, txtContrasena, txtBancosRetrofit;
-    private RadioButton rbRetrofit, rbVolley;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity{
                 String cod_respuesta = "Código "+response.code();
                 String valores ="";
                 List<Bancos> lista_bancos = response.body();
+                //Almacenando en la lista de tipo Bancos cada uno alojado en el JSON
                 for(Bancos banco: lista_bancos){
-                    valores+="Banco: "+banco.getName()+"\n";
+                    valores+=banco.getName()+"\n";
                 }
                 //Colocando los bancos extraídos al EditText
                 txtBancosRetrofit.setText(valores);
@@ -62,16 +63,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void btnAcceder_Onclick(View view){
-        if(rbRetrofit.isChecked()){
-            Toast.makeText(this,"Retrofit seleccionado",Toast.LENGTH_LONG).show();
-
-        }
-        else if(rbVolley.isChecked()){
-            Toast.makeText(this,"Volley seleccionado",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(this,"Seleccione Retrofit o Volley",Toast.LENGTH_LONG).show();
-        }
+        Intent intent = new Intent(MainActivity.this,ActivityResultado.class);
+        Bundle b = new Bundle();
+        String valores[] = {txtUsuario.getText().toString(),txtContrasena.getText().toString()};
+        b.putStringArray("Valores",valores);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
 
